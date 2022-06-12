@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-
+# 图像堆叠拼接实现
 def stackImages(scale,imgArray):
     rows = len(imgArray)
     cols = len(imgArray[0])
@@ -36,9 +36,12 @@ def stackImages(scale,imgArray):
 img = cv2.imread('Resources/lena.png')
 imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
+
 imgStack = stackImages(0.5,([img,imgGray,img],[img,img,img]))
 
+#水平拼接
 # imgHor = np.hstack((img,img))
+#垂直拼接
 # imgVer = np.vstack((img,img))
 #
 # cv2.imshow("Horizontal",imgHor)

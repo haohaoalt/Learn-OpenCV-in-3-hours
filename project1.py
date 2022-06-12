@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10,150)
@@ -35,7 +35,7 @@ def findColor(img,myColors,myColorValues):
     return newPoints
 
 def getContours(img):
-    contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    image,contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     x,y,w,h = 0,0,0,0
     for cnt in contours:
         area = cv2.contourArea(cnt)
@@ -64,4 +64,4 @@ while True:
 
     cv2.imshow("Result", imgResult)
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        breaks

@@ -37,9 +37,12 @@ def stackImages(scale,imgArray):
 
 
 
-path = 'Resources/lambo.png'
+path = 'Resources/lambo.PNG'
+# TrackBars 这个工具感觉非常有用，可以让用户自己调节参数
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars",640,240)
+# 创建一个TrackBar
+#cv2.createTrackbar("Hue Min（参数名）", "TrackBars（窗口名）", 0（起始值）, 179（终止值）, empty)
 cv2.createTrackbar("Hue Min","TrackBars",0,179,empty)
 cv2.createTrackbar("Hue Max","TrackBars",19,179,empty)
 cv2.createTrackbar("Sat Min","TrackBars",110,255,empty)
@@ -59,7 +62,9 @@ while True:
     print(h_min,h_max,s_min,s_max,v_min,v_max)
     lower = np.array([h_min,s_min,v_min])
     upper = np.array([h_max,s_max,v_max])
+    # mask 蒙版？
     mask = cv2.inRange(imgHSV,lower,upper)
+    # 两个图像结合在一起作为imgResult的结果
     imgResult = cv2.bitwise_and(img,img,mask=mask)
 
 

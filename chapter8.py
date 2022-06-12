@@ -33,7 +33,8 @@ def stackImages(scale,imgArray):
     return ver
 
 def getContours(img):
-    contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    #查找轮廓findContours cvFindContours是从二值图像中检索轮廓，并返回检测到的轮廓的个数
+    image,contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     for cnt in contours:
         area = cv2.contourArea(cnt)
         print(area)
@@ -70,11 +71,12 @@ imgContour = img.copy()
 
 imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 imgBlur = cv2.GaussianBlur(imgGray,(7,7),1)
+# 边缘检测
 imgCanny = cv2.Canny(imgBlur,50,50)
 getContours(imgCanny)
 
 imgBlank = np.zeros_like(img)
-imgStack = stackImages(0.8,([img,imgGray,imgBlur],
+imgStack = stackImages(0.5,([img,imgGray,imgBlur],
                             [imgCanny,imgContour,imgBlank]))
 
 cv2.imshow("Stack", imgStack)
